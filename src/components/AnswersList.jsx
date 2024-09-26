@@ -1,15 +1,21 @@
 import AnswersItem from "./AnswersItem";
+import PropTypes from "prop-types";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
-
-  const { answersList } = props;
+export default function AnswersList({submittedForms, onEdit}) {
+  console.log("Inside AnswersList: ", submittedForms);
 
   return (
-    <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
-      ))}
-    </ul>
+    submittedForms && (
+      <ul>
+        {submittedForms.map((answerItem, i) => (
+          <AnswersItem answerItem={answerItem} key={i} index={i} onEdit={onEdit} />
+        ))}
+      </ul>
+    )
   );
 }
+
+AnswersList.propTypes = {
+  submittedForms: PropTypes.array,
+  onEdit: PropTypes.func
+};
